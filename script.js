@@ -4,7 +4,7 @@
 // - Toggles with button #toggle-audio and updates #audio-icon
 
 (function () {
-	const AUDIO_SRC = './songs/Ly.mp3';
+	const AUDIO_SRC = './Ly.mp3';
 
 	function createAudioElement() {
 		const audio = new Audio(AUDIO_SRC);
@@ -32,18 +32,22 @@
 				this.updateUI();
 			};
 
-			// Kick off playback on first user gesture
-			document.addEventListener(
-				'click',
-				() => {
-					if (!this.isPlaying) {
-						this.audio
-							.play()
-							.catch((err) => console.warn('Không thể phát nhạc:', err));
-					}
-				},
-				{ once: true }
-			);
+
+			// Cố gắng phát ngay nếu đang trong ngữ cảnh tương tác người dùng (ví dụ sau khi ấn OK)
+			this.audio.play().catch(() => {
+				// Nếu bị chặn bởi chính sách autoplay, phát ở click kế tiếp
+				document.addEventListener(
+					'click',
+					() => {
+						if (!this.isPlaying) {
+							this.audio
+								.play()
+								.catch((err) => console.warn('Không thể phát nhạc:', err));
+						}
+					},
+					{ once: true }
+				);
+			});
 
 			this.updateUI();
 		},
