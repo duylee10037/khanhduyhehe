@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lovely</title>
+  <link rel="icon" type="image/png" href="./heart.png" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./loading.css" />
+  <link rel="stylesheet" href="./gate.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    #copyright-badge{
+      position:fixed;top:8px;left:10px;z-index:10001;
+      font-size:12px;line-height:1;opacity:0.9;
+      pointer-events:none;user-select:none;
+      transition:color .2s ease;
+    }
+    /* Mặc định ở màn PIN: chữ đen */
+    #copyright-badge.badge-gate{ color:#000; }
+    /* Khi đã vào web: chữ trắng */
+    #copyright-badge.badge-app{ color:#fff; }
+  </style>
+  
+  <!-- Bảo mật tối ưu - chặn DevTools ngay từ đầu -->
+  <script>
+    // Chặn ngay lập tức khi HTML được parse
+    (function() {
+      'use strict';
+      
+               // Kiểm tra nếu DevTools đã mở trước khi trang load
+         function immediateCheck() {
+           // Kiểm tra kích thước cửa sổ
+           if (window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200) {
+             // DevTools đã mở, chuyển hướng ngay lập tức
+             try {
+               // Thử chuyển hướng trước
+               window.location.href = "https://www.google.com";
+             } catch (e) {
+               // Nếu chuyển hướng thất bại, hiển thị trang Access Denied
+               document.open();
+               document.write(`
+                 <!DOCTYPE html>
+                 <html>
+                 <head>
+                   <meta charset="UTF-8">
+                   <title>Access Denied</title>
+                   <style>
+                     body {
+                       background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+                       color: white;
+                       font-family: Arial, sans-serif;
+                       display: flex;
+                       justify-content: center;
+                       align-items: center;
+                       height: 100vh;
+                       margin: 0;
+                       text-align: center;
+                     }
+                     .error-container {
+                       background: rgba(255, 255, 255, 0.1);
+                       padding: 40px;
+                       border-radius: 20px;
+                       backdrop-filter: blur(10px);
+                       border: 1px solid rgba(255, 255, 255, 0.2);
+                     }
+                     .error-icon {
+                       font-size: 4rem;
+                       color: #ff6b6b;
+                       margin-bottom: 20px;
+                     }
+                     .error-title {
+                       font-size: 2rem;
+                       color: #ff6b6b;
+                       margin-bottom: 15px;
+                     }
+                     .error-message {
+                       font-size: 1.2rem;
+                       color: #cccccc;
+                       margin-bottom: 20px;
+                     }
+                     .error-description {
+                       font-size: 1rem;
+                       color: #999999;
+                       line-height: 1.5;
+                     }
+                   </style>
+                 </head>
+                 <body>
+                   <div class="error-container">
+                     <div class="error-icon">🚫</div>
+                     <h1 class="error-title">Access Denied</h1>
+                     <p class="error-message">Developer Tools đã được mở!</p>
+                     <p class="error-description">
+                       Vui lòng đóng Developer Tools để tiếp tục sử dụng trang web.<br>
+                       Nếu bạn cần hỗ trợ, hãy liên hệ với quản trị viên.
+                     </p>
+                   </div>
+                 </body>
+                 </html>
+               `);
+               document.close();
+             }
+             return;
+           }
+        
+                 // Kiểm tra console
+         const startTime = performance.now();
+         console.log('%c', 'color: transparent');
+         const endTime = performance.now();
+         
+         if (endTime - startTime > 100) {
+           // DevTools đã mở, chuyển hướng ngay lập tức
+           try {
+             // Thử chuyển hướng trước
+             window.location.href = "https://www.google.com";
+           } catch (e) {
+             // Nếu chuyển hướng thất bại, hiển thị trang Access Denied
+             document.open();
+             document.write(`
+               <!DOCTYPE html>
+               <html>
+               <head>
+                 <meta charset="UTF-8">
+                 <title>Access Denied</title>
+                 <style>
+                   body {
+                     background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+                     color: white;
+                     font-family: Arial, sans-serif;
+                     display: flex;
+                     justify-content: center;
+                     align-items: center;
+                     height: 100vh;
+                     margin: 0;
+                     text-align: center;
+                   }
+                   .error-container {
+                     background: rgba(255, 255, 255, 0.1);
+                     padding: 40px;
+                     border-radius: 20px;
+                     backdrop-filter: blur(10px);
+                     border: 1px solid rgba(255, 255, 255, 0.2);
+                   }
+                   .error-icon {
+                     font-size: 4rem;
+                     color: #ff6b6b;
+                     margin-bottom: 20px;
+                   }
+                   .error-title {
+                     font-size: 2rem;
+                     color: #ff6b6b;
+                     margin-bottom: 15px;
+                   }
+                   .error-message {
+                     font-size: 1.2rem;
+                     color: #cccccc;
+                     margin-bottom: 20px;
+                   }
+                   .error-description {
+                     font-size: 1rem;
+                     color: #999999;
+                     line-height: 1.5;
+                   }
+                 </style>
+               </head>
+               <body>
+                 <div class="error-container">
+                   <div class="error-icon">🚫</div>
+                   <h1 class="error-title">Access Denied</h1>
+                   <p class="error-message">Developer Tools đã được mở!</p>
+                   <p class="error-description">
+                     Vui lòng đóng Developer Tools để tiếp tục sử dụng trang web.<br>
+                     Nếu bạn cần hỗ trợ, hãy liên hệ với quản trị viên.
+                   </p>
+                 </div>
+               </body>
+               </html>
+             `);
+             document.close();
+           }
+           return;
+         }
+      }
+      
+      // Chạy ngay lập tức
+      immediateCheck();
+      
+      // Chạy lại sau 100ms để đảm bảo
+      setTimeout(immediateCheck, 100);
+      
+      // Chạy lại sau 500ms
+      setTimeout(immediateCheck, 500);
+      
+    })();
+  </script>
+
+  <!-- Bảo mật ngay từ đầu - chặn DevTools trước khi trang load -->
+  <script>
+    (function() {
+      'use strict';
+      
+      // Chặn ngay lập tức khi script này chạy
+      function blockDevTools() {
+                 // Kiểm tra nếu DevTools đã mở
+         if (window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200) {
+           // DevTools đã mở, chuyển hướng ngay lập tức
+           try {
+             // Thử chuyển hướng trước
+             window.location.href = "https://www.google.com";
+           } catch (e) {
+             // Nếu chuyển hướng thất bại, hiển thị trang Access Denied
+             document.documentElement.innerHTML = `
+               <!DOCTYPE html>
+               <html>
+               <head>
+                 <meta charset="UTF-8">
+                 <title>Access Denied</title>
+                 <style>
+                   body {
+                     background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+                     color: white;
+                     font-family: Arial, sans-serif;
+                     display: flex;
+                     justify-content: center;
+                     align-items: center;
+                     height: 100vh;
+                     margin: 0;
+                     text-align: center;
+                   }
+                   .error-container {
+                     background: rgba(255, 255, 255, 0.1);
+                     padding: 40px;
+                     border-radius: 20px;
+                     backdrop-filter: blur(10px);
+                     border: 1px solid rgba(255, 255, 255, 0.2);
+                   }
+                   .error-icon {
+                     font-size: 4rem;
+                     color: #ff6b6b;
+                     margin-bottom: 20px;
+                   }
+                   .error-title {
+                     font-size: 2rem;
+                     color: #ff6b6b;
+                     margin-bottom: 15px;
+                   }
+                   .error-message {
+                     font-size: 1.2rem;
+                     color: #cccccc;
+                     margin-bottom: 20px;
+                   }
+                   .error-description {
+                     font-size: 1rem;
+                     color: #999999;
+                     line-height: 1.5;
+                   }
+                 </style>
+               </head>
+               <body>
+                 <div class="error-container">
+                   <div class="error-icon">🚫</div>
+                   <h1 class="error-title">Access Denied</h1>
+                   <p class="error-message">Developer Tools đã được mở!</p>
+                   <p class="error-description">
+                     Vui lòng đóng Developer Tools để tiếp tục sử dụng trang web.<br>
+                     Nếu bạn cần hỗ trợ, hãy liên hệ với quản trị viên.
+                   </p>
+                 </div>
+               </body>
+               </html>
+             `;
+           }
+           return;
+         }
+        
+        // Chặn các phím tắt mở DevTools
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'F12' || 
+              ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.key === 'C')) ||
+              ((e.ctrlKey || e.metaKey) && e.key === 'u')) {
+            e.preventDefault();
+            e.stopPropagation();
+            blockDevTools();
+            return false;
+          }
+        }, true);
+        
+        // Chặn chuột phải
+        document.addEventListener('contextmenu', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          blockDevTools();
+          return false;
+        }, true);
+        
+        // Chặn chọn text
+        document.addEventListener('selectstart', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }, true);
+        
+        // Chặn copy/paste
+        ['copy', 'cut', 'paste'].forEach(function(event) {
+          document.addEventListener(event, function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }, true);
+        });
+        
+        // Chặn drag/drop
+        ['dragstart', 'drop'].forEach(function(event) {
+          document.addEventListener(event, function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }, true);
+        });
+        
+        // Chặn reload
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'F5' || ((e.ctrlKey || e.metaKey) && e.key === 'r')) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+        }, true);
+        
+        // Cho phép đóng/tab mà không hỏi lại (bỏ beforeunload)
+        
+        // Chặn history manipulation
+        if (window.history && window.history.pushState) {
+          window.addEventListener('popstate', function(e) {
+            window.history.pushState(null, null, window.location.href);
+          });
+          window.history.pushState(null, null, window.location.href);
+        }
+        
+        // Kiểm tra liên tục kích thước cửa sổ
+        let checkCount = 0;
+        const checkDevTools = setInterval(function() {
+          checkCount++;
+          
+                     // Kiểm tra kích thước cửa sổ
+           if (window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200) {
+             clearInterval(checkDevTools);
+             // Chuyển hướng ngay lập tức
+             try {
+               window.location.href = "https://www.google.com";
+             } catch (e) {
+               blockDevTools();
+             }
+             return;
+           }
+           
+           // Kiểm tra console
+           const startTime = performance.now();
+           console.log('%c', 'color: transparent');
+           const endTime = performance.now();
+           
+           if (endTime - startTime > 100) {
+             clearInterval(checkDevTools);
+             // Chuyển hướng ngay lập tức
+             try {
+               window.location.href = "https://www.google.com";
+             } catch (e) {
+               blockDevTools();
+             }
+             return;
+           }
+          
+          // Dừng kiểm tra sau 5 giây để tiết kiệm tài nguyên
+          if (checkCount > 25) {
+            clearInterval(checkDevTools);
+          }
+        }, 200);
+      }
+      
+      // Chạy ngay lập tức
+      blockDevTools();
+      
+      // Chạy lại khi DOM ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', blockDevTools);
+      } else {
+        blockDevTools();
+      }
+      
+      // Chạy lại khi window load
+      window.addEventListener('load', blockDevTools);
+      
+    })();
+  </script>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.152.2/build/three.module.js",
+        "three/addons/controls/OrbitControls.js": "https://unpkg.com/three@0.152.2/examples/jsm/controls/OrbitControls.js",
+        "three/examples/jsm/loaders/FontLoader.js": "https://unpkg.com/three@0.152.2/examples/jsm/loaders/FontLoader.js",
+        "three/examples/jsm/geometries/TextGeometry.js": "https://unpkg.com/three@0.152.2/examples/jsm/geometries/TextGeometry.js"
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <div id="copyright-badge" class="badge-gate">Created by KhanhDuy</div>
+  <!-- Password Gate Overlay -->
+  <div id="gate" class="gate-overlay">
+    <div class="gate-card">
+      <img src="./image/2.jpg" alt="photo" class="gate-photo" />
+      <div class="gate-body">
+        <div class="gate-title">Hem cho bíc đâu</div>
+        <div id="gate-display" class="gate-display"></div>
+        <div class="gate-grid">
+          <button class="gate-btn" data-n="1">1</button>
+          <button class="gate-btn" data-n="2">2</button>
+          <button class="gate-btn" data-n="3">3</button>
+          <button class="gate-btn" data-n="4">4</button>
+          <button class="gate-btn" data-n="5">5</button>
+          <button class="gate-btn" data-n="6">6</button>
+          <button class="gate-btn" data-n="7">7</button>
+          <button class="gate-btn" data-n="8">8</button>
+          <button class="gate-btn" data-n="9">9</button>
+        </div>
+        <div class="gate-row-bottom">
+          <button id="gate-del" class="gate-btn gate-btn-danger gate-btn-wide">⌫</button>
+          <button class="gate-btn gate-btn-wide" data-n="0">0</button>
+          <button id="gate-ok" class="gate-btn gate-btn-accent gate-btn-wide">OK</button>
+        </div>
+        <div class="gate-clue">by KhanhDuy</div>
+      </div>
+    </div>
+  </div>
+  <!-- Loading Screen -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-planet">
+      <div class="planet"></div>
+    </div>
+    <div class="loading-text">
+      <h1 class="loading-title">Love Planet</h1>
+      <p class="loading-subtitle">Đang tải thiên hà...</p>
+      <p class="loading-description">Vui lòng chờ trong giây lát</p>
+    </div>
+    <div class="loading-bar">
+      <div class="loading-progress"></div>
+    </div>
+  </div>
+
+  <div id="container">
+    <button id="toggle-audio" class="text-white btn-audio-toggle"
+      style="position: absolute; top: 10px; right: 10px; z-index: 999;">
+      <i id="audio-icon" class="fa-solid fa-volume-xmark"></i>
+    </button>
+
+    <div id="landscape-warning">
+      <div class="warning-content">
+        <div class="rotate-icon"></div>
+        <h1>iu Chim</h1>
+        <h1>Tinh Cầu</h1>
+        <p style="font-size: 0.6em;">Cậu hãy xoay ngang màn hình nha!</p>
+        <p style="font-size: 0.6em;">Nhớ chạm vào tinh cầu ở giữa để mở quà bí mật nha.</p>
+        <div class="stars-bg"></div>
+      </div>
+    </div>
+
+    <div id="dark-overlay"></div>
+    <div id="info"></div>
+
+  </div>
+
+  <!-- Help overlay -->
+  <button id="help-toggle" title="Hướng dẫn"><i class="fa-solid fa-circle-question"></i></button>
+  <div id="help-overlay">
+    <div id="help-card">
+      <h2>Hướng dẫn sử dụng dành cho Chim nè</h2>
+      <div class="help-body">
+        <ul>
+          <li>Nhập pass 6 số á , rùi làm theo bước tiếp nhó</li>
+          <li>Chạm vào tinh cầu ở giữa để bắt đầu hiệu ứng và mở rộng bối cảnh.</li>
+          <li>Kéo/zoom để xoay và phóng to/thu nhỏ khung cảnh.</li>
+          <li>Nút loa góc phải để bật/tắt nhạc.</li>
+          <li>Hơi lag tại tui không biết tối ưu</li>
+          <li>Nút hiển thị lại hướng dẫn góc phải nha <3</li>
+        </ul>
+      </div>
+      <div class="help-actions">
+        <button class="help-btn" id="help-close">Đóng</button>
+        <button class="help-btn primary" id="help-gotit">Đã hiểu</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    window.dataLove2Loveloom = {
+      template: "galaxy",
+      data: {
+        keychain: { name: "Loveloom", phone: "Loveloom", address: "Loveloom" },
+        ringTexts: ["iu Chim"],
+        // Add relative paths to your local images here. Example:
+        images: [
+          "./image/001.png",
+          "./image/002.jpg",
+          "./image/003.jpg",
+          "./image/004.jpg",
+          "./image/005.jpg",
+          "./image/006.jpg",
+          "./image/007.jpg",
+          "./image/008.jpg",
+          "./image/009.jpg",
+          "./image/010.jpg",
+          "./image/011.jpg",
+          "./image/012.jpg",
+          "./image/013.jpg",
+          "./image/014.jpg",
+          "./image/015.jpg",
+          "./image/016.jpg",
+          "./image/017.jpg",
+          "./image/018.jpg",
+          "./image/019.jpg",
+          "./image/020.jpg",
+          "./image/021.jpg",
+          "./image/022.jpg",
+          "./image/023.jpg",
+          "./image/024.jpg",
+          "./image/025.jpg",
+          "./image/026.jpg",
+          "./image/027.jpg",
+          "./image/028.jpg",
+          "./image/029.jpg",
+          "./image/030.jpg",
+          "./image/031.jpg",
+          "./image/032.jpg",
+          "./image/033.jpg",
+          "./image/034.jpg",
+          "./image/035.jpg",
+          "./image/036.jpg",
+          "./image/037.jpg",
+          "./image/038.jpg",
+          "./image/039.jpg",
+          "./image/040.jpg",
+          "./image/041.jpg",
+          "./image/042.jpg",
+          "./image/043.jpg",
+          "./image/044.jpg",
+          "./image/045.jpg",
+          "./image/046.jpg",
+          "./image/047.jpg",
+          "./image/048.jpg",
+          "./image/049.jpg",
+          "./image/050.jpg",
+          "./image/051.jpg",
+          "./image/052.jpg",
+          "./image/053.jpg",
+          "./image/054.jpg",
+          "./image/055.jpg",
+          "./image/056.jpg",
+          "./image/057.jpg",
+          "./image/058.jpg",
+          "./image/059.jpg",
+          "./image/060.jpg",
+          "./image/061.jpg",
+          "./image/062.jpg",
+          "./image/063.jpg",
+          "./image/064.jpg",
+          "./image/065.jpg",
+          "./image/066.jpg",
+          "./image/067.jpg",
+          "./image/068.jpg",
+          "./image/069.jpg",
+          "./image/070.jpg",
+          "./image/071.jpg",
+          "./image/072.jpg",
+          "./image/073.jpg",
+          "./image/074.jpg",
+          "./image/075.jpg",
+          "./image/076.jpg",
+          "./image/077.jpg",
+          "./image/078.jpg",
+          "./image/079.jpg",
+          "./image/080.jpg"
+        ],
+      }
+    };
+  </script>
+
+  <script src="./detect-devtools.js"></script>
+  <script src="./script.js"></script>
+  <script type="module" src="./galaxy.js"></script>
+  <script>
+    (function(){
+      const overlay = document.getElementById('help-overlay');
+      const toggle  = document.getElementById('help-toggle');
+      const closeBtn = document.getElementById('help-close');
+      const gotIt = document.getElementById('help-gotit');
+
+      function show(){ overlay.classList.add('show'); }
+      function hide(){ overlay.classList.remove('show'); }
+
+      // Hiển thị khi tải trang, kể cả khi DOMContentLoaded đã xảy ra
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', show);
+      } else {
+        show();
+      }
+      toggle.addEventListener('click', show);
+      closeBtn.addEventListener('click', hide);
+      gotIt.addEventListener('click', hide);
+      overlay.addEventListener('click', function(e){ if (e.target === overlay) hide(); });
+      // Phím tắt: nhấn H để mở/đóng
+      document.addEventListener('keydown', function(e){
+        if (e.key.toLowerCase() === 'h') {
+          if (overlay.classList.contains('show')) hide(); else show();
+        }
+      });
+    })();
+
+    // Loading Screen Handler + Gate
+    (function() {
+      const loadingScreen = document.getElementById('loading-screen');
+      const container = document.getElementById('container');
+      const gate = document.getElementById('gate');
+      const display = document.getElementById('gate-display');
+      const delBtn = document.getElementById('gate-del');
+      const okBtn = document.getElementById('gate-ok');
+      let input = '';
+      const MAX_LEN = 6; // tối đa 6 ký tự
+      const PASS = '241124'; // Đổi PIN tại đây
+
+      // Ẩn container và loading ban đầu
+      container.style.display = 'none';
+      loadingScreen.style.display = 'none';
+
+      function setDisplay() {
+        display.textContent = input.length ? '•'.repeat(input.length) : '';
+      }
+
+      function shakeCard() {
+        const card = gate.querySelector('.gate-card');
+        card.classList.add('shake');
+        setTimeout(() => card.classList.remove('shake'), 400);
+      }
+
+      function startApp() {
+        // Ẩn gate, hiện loading 10s rồi vào scene
+        gate.classList.add('hide');
+        loadingScreen.style.display = 'flex';
+        setTimeout(function() {
+          loadingScreen.classList.add('fade-out');
+          setTimeout(function() {
+            loadingScreen.style.display = 'none';
+            container.style.display = 'block';
+            // Đổi style badge sang chế độ trong web sau khi vào scene
+            const badge = document.getElementById('copyright-badge');
+            if (badge) { badge.classList.remove('badge-gate'); badge.classList.add('badge-app'); }
+          }, 500);
+        }, 10000);
+      }
+
+      // Nút số
+      gate.addEventListener('click', function(e){
+        const n = e.target.getAttribute('data-n');
+        if (n === null) return;
+        if (input.length >= MAX_LEN) return;
+        input += n;
+        setDisplay();
+      });
+
+      // Xóa
+      delBtn.addEventListener('click', function(){
+        input = input.slice(0, -1);
+        setDisplay();
+      });
+
+      // OK
+      okBtn.addEventListener('click', function(){
+        if (input === PASS) {
+          startApp();
+        } else {
+          input = '';
+          setDisplay();
+          shakeCard();
+        }
+      });
+
+      setDisplay();
+    })();
+
+    // Bảo mật bổ sung - xử lý các trường hợp đặc biệt
+    (function() {
+      // Vô hiệu hóa các phím tắt mở DevTools
+      document.addEventListener('keydown', function(e) {
+        // F12
+        if (e.key === 'F12') {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+        
+        // Ctrl+Shift+I (Windows/Linux) hoặc Cmd+Option+I (Mac)
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'I') {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+        
+        // Ctrl+Shift+C (Windows/Linux) hoặc Cmd+Option+C (Mac)
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'C') {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+        
+        // Ctrl+U (View Source)
+        if ((e.ctrlKey || e.metaKey) && e.key === 'u') {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+      }, true);
+      
+      // Vô hiệu hóa chuột phải
+      document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }, true);
+      
+      // Vô hiệu hóa chọn text
+      document.addEventListener('selectstart', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }, true);
+      
+      // Vô hiệu hóa copy
+      document.addEventListener('copy', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }, true);
+      
+      // Vô hiệu hóa cut
+      document.addEventListener('cut', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }, true);
+      
+      // Vô hiệu hóa paste
+      document.addEventListener('paste', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }, true);
+      
+      // Vô hiệu hóa drag
+      document.addEventListener('dragstart', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }, true);
+      
+      // Vô hiệu hóa drop
+      document.addEventListener('drop', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }, true);
+      
+      // Vô hiệu hóa reload trang
+      document.addEventListener('keydown', function(e) {
+        // F5 hoặc Ctrl+R
+        if (e.key === 'F5' || ((e.ctrlKey || e.metaKey) && e.key === 'r')) {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+      }, true);
+      
+      // Cho phép đóng/tab mà không hỏi lại
+      window.removeEventListener('beforeunload', function(){});
+      
+      // Vô hiệu hóa history manipulation
+      if (window.history && window.history.pushState) {
+        window.addEventListener('popstate', function(e) {
+          window.history.pushState(null, null, window.location.href);
+        });
+        window.history.pushState(null, null, window.location.href);
+      }
+    })();
+
+    // Khởi tạo Disable Devtool
+    (function() {
+      // Cấu hình Disable Devtool
+      const config = {
+        // Vô hiệu hóa menu chuột phải
+        disableMenu: true,
+        // Vô hiệu hóa chọn text
+        disableSelect: true,
+        // Vô hiệu hóa copy
+        disableCopy: true,
+        // Vô hiệu hóa cut
+        disableCut: true,
+        // Vô hiệu hóa paste
+        disablePaste: true,
+        // Xóa console log
+        clearLog: true,
+        // Thời gian kiểm tra (ms) - giảm xuống để phát hiện nhanh hơn
+        interval: 200,
+        // Sử dụng tất cả detector
+        detectors: "all",
+        // Dừng interval khi DevTools mở để tiết kiệm tài nguyên
+        clearIntervalWhenDevOpenTrigger: true,
+        // HTML tùy chỉnh khi phát hiện DevTools (ưu tiên hơn URL)
+        rewriteHTML: `
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="UTF-8">
+            <title>Access Denied</title>
+            <style>
+              body {
+                background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+                color: white;
+                font-family: Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                text-align: center;
+              }
+              .error-container {
+                background: rgba(255, 255, 255, 0.1);
+                padding: 40px;
+                border-radius: 20px;
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+              }
+              .error-icon {
+                font-size: 4rem;
+                color: #ff6b6b;
+                margin-bottom: 20px;
+              }
+              .error-title {
+                font-size: 2rem;
+                color: #ff6b6b;
+                margin-bottom: 15px;
+              }
+              .error-message {
+                font-size: 1.2rem;
+                color: #cccccc;
+                margin-bottom: 20px;
+              }
+              .error-description {
+                font-size: 1rem;
+                color: #999999;
+                line-height: 1.5;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="error-container">
+              <div class="error-icon">🚫</div>
+              <h1 class="error-title">Access Denied</h1>
+              <p class="error-message">Developer Tools không được phép sử dụng!</p>
+              <p class="error-description">
+                Vui lòng đóng Developer Tools để tiếp tục sử dụng trang web.<br>
+                Nếu bạn cần hỗ trợ, hãy liên hệ với quản trị viên.
+              </p>
+            </div>
+          </body>
+          </html>
+        `,
+        // URL chuyển hướng khi phát hiện DevTools (backup)
+        url: "https://www.google.com",
+        // Thời gian timeout để chuyển hướng (ms)
+        timeOutUrl: "https://www.google.com",
+                 // Callback khi phát hiện DevTools mở
+         ondevtoolopen: function(type) {
+           console.warn("Developer Tools đã được mở! Loại: " + type);
+           
+           // Chuyển hướng ngay lập tức
+           try {
+             window.location.href = "https://www.google.com";
+           } catch (e) {
+             // Nếu chuyển hướng thất bại, thử rewrite HTML
+             try {
+               document.documentElement.innerHTML = `
+                 <!DOCTYPE html>
+                 <html>
+                 <head>
+                   <meta charset="UTF-8">
+                   <title>Access Denied</title>
+                   <style>
+                     body {
+                       background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+                       color: white;
+                       font-family: Arial, sans-serif;
+                       display: flex;
+                       justify-content: center;
+                       align-items: center;
+                       height: 100vh;
+                       margin: 0;
+                       text-align: center;
+                     }
+                     .error-container {
+                       background: rgba(255, 255, 255, 0.1);
+                       padding: 40px;
+                       border-radius: 20px;
+                       backdrop-filter: blur(10px);
+                       border: 1px solid rgba(255, 255, 255, 0.2);
+                     }
+                     .error-icon {
+                       font-size: 4rem;
+                       color: #ff6b6b;
+                       margin-bottom: 20px;
+                     }
+                     .error-title {
+                       font-size: 2rem;
+                       color: #ff6b6b;
+                       margin-bottom: 15px;
+                     }
+                     .error-message {
+                       font-size: 1.2rem;
+                       color: #cccccc;
+                       margin-bottom: 20px;
+                     }
+                     .error-description {
+                       font-size: 1rem;
+                       color: #999999;
+                       line-height: 1.5;
+                     }
+                   </style>
+                 </head>
+                 <body>
+                   <div class="error-container">
+                     <div class="error-icon">🚫</div>
+                     <h1 class="error-title">Access Denied</h1>
+                     <p class="error-message">Developer Tools không được phép sử dụng!</p>
+                     <p class="error-description">
+                       Vui lòng đóng Developer Tools để tiếp tục sử dụng trang web.<br>
+                       Nếu bạn cần hỗ trợ, hãy liên hệ với quản trị viên.
+                     </p>
+                   </div>
+                 </body>
+                 </html>
+               `;
+             } catch (e2) {
+               // Nếu cả hai đều thất bại, thử đóng cửa sổ
+               try {
+                 window.close();
+               } catch (e3) {
+                 // Cuối cùng, thử reload trang
+                 try {
+                   window.location.reload();
+                 } catch (e4) {
+                   console.error("Không thể xử lý DevTools:", e4);
+                 }
+               }
+             }
+           }
+         },
+        // Callback khi DevTools đóng
+        ondevtoolclose: function() {
+          console.log("Developer Tools đã được đóng");
+        }
+      };
+
+      // Khởi tạo Disable Devtool
+      try {
+        if (typeof DisableDevtool !== 'undefined') {
+          DisableDevtool(config);
+          console.log("Disable Devtool đã được khởi tạo thành công!");
+        } else {
+          console.error("Không thể tìm thấy DisableDevtool!");
+        }
+      } catch (error) {
+        console.error("Lỗi khi khởi tạo Disable Devtool:", error);
+      }
+    })();
+  </script>
+</body>
+
+</html>
