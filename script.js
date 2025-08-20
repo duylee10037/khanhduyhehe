@@ -4,7 +4,7 @@
 // - Toggles with button #toggle-audio and updates #audio-icon
 
 (function () {
-	const AUDIO_SRC = './Ly.mp3';
+	const AUDIO_SRC = './songs/Ly.mp3';
 
 	function createAudioElement() {
 		const audio = new Audio(AUDIO_SRC);
