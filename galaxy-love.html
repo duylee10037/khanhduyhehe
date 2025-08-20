@@ -679,6 +679,10 @@
       okBtn.addEventListener('click', function(){
         if (input === PASS) {
           startApp();
+          // Thông báo ứng dụng đã bắt đầu để hệ thống nhạc khởi tạo
+          try {
+            window.dispatchEvent(new Event('app:started'));
+          } catch (e) {}
         } else {
           input = '';
           setDisplay();
